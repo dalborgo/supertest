@@ -5,7 +5,10 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "lerna run start",
+    "start web": "lerna run start --scope @mdb/web --stream --no-prefix",
+    "start server": "lerna run start --scope @mdb/server --stream --no-prefix",
+    "start all": "lerna run start --stream --concurrency 2 --no-prefix",
+    "build": "lerna run build",
     "update-version": "lerna version patch --no-git-tag-version --no-push --yes",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff",

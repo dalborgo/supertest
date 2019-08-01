@@ -1,0 +1,10 @@
+{
+  "server": {
+    "DB_SERVER": "127.0.0.1",
+    "USER": "cynation",
+    "PASS": "902100",
+    "PORT": "5008",
+    "MAXAGE_MINUTES": 120,
+    "ORIGIN": "http://46.141.98.220:5009"
+  }
+}
