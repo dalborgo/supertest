@@ -1,0 +1,17 @@
+{
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "lerna run start",
+    "update-version": "lerna version patch --no-git-tag-version --no-push --yes",
+    "new-version": "lerna version --conventional-commits --yes",
+    "diff": "lerna diff"
+  },
+  "name": "supertest",
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  }
+}
