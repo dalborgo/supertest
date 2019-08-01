@@ -8,7 +8,8 @@
     "start": "lerna run start",
     "update-version": "lerna version patch --no-git-tag-version --no-push --yes",
     "new-version": "lerna version --conventional-commits --yes",
-    "diff": "lerna diff"
+    "diff": "lerna diff",
+    "typeface": "del node_modules\\typeface-roboto\\files\\*.* /Q&&xcopy c:\\Users\\Asten\\Desktop\\_base\\superbase\\typeface-roboto node_modules\\typeface-roboto /Y /E"
   },
   "name": "supertest",
   "devDependencies": {
