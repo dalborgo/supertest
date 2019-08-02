@@ -2,8 +2,8 @@ import { getNow } from '../index'
 import axios from 'axios'
 import config from 'config'
 
-const {NODE_ENV, DB_SERVER, GDPR_USER, GDPR_PASS, REG_USER} = config.get('server')
-const auth = {username: GDPR_USER, password: GDPR_PASS}
+const {NODE_ENV, DB_SERVER, USER, PASS} = config.get('server')
+const auth = {username: USER, password: PASS}
 const {version} = require('../../../../package')
 
 function gestConnErr (err) {
@@ -51,7 +51,7 @@ async function getCouchInfo () {
 export async function getView (view, stale = false) {
   try {
     const r = await axios({
-      url: `http://${DB_SERVER}:8092/${GDPR_USER}/_design/${GDPR_USER}/_view/${view}?stale=${stale}`,
+      url: `http://${DB_SERVER}:8092/${USER}/_design/${USER}/_view/${view}?stale=${stale}`,
       auth
     })
     return r.data
@@ -67,7 +67,7 @@ async function getIndexStatus () {
     let problem = false, output = []
     r.data['indexes'].forEach(e => {
       problem |= e.status !== 'Ready'
-      if ([GDPR_USER, REG_USER].includes(e.bucket)) {
+      if ([USER].includes(e.bucket)) {
         output.push({name: e.index, status: e.status, bucket: e.bucket})
       }
     })
@@ -101,7 +101,7 @@ export async function httpStatus () {
       return httpError(server.response)
     if (indexes instanceof Error)
       return httpError(indexes.response)
-    return {version, nodejs: process.version, bucket: GDPR_USER, node_env: NODE_ENV, server, indexes}
+    return {version, nodejs: process.version, bucket: USER, node_env: NODE_ENV, server, indexes}
   } catch (err) {
     return err
   }

@@ -3,7 +3,7 @@
     "DB_SERVER": "127.0.0.1",
     "USER": "supertest",
     "PASS": "902100",
-    "PORT": "5008",
+    "PORT": "4000",
     "MAXAGE_MINUTES": 120,
     "ORIGIN": ["http://46.141.98.220:4000"]
   }

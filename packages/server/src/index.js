@@ -6,18 +6,19 @@ import { ApolloServer } from 'apollo-server-express'
 import typeDefs from './typeDefs'
 import resolvers from './resolvers'
 import schemaDirectives from './directives'
-import { utilsRoutes} from './routes'
+import { utilsRoutes } from './routes'
 import config from 'config'
+
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const {MAXAGE_MINUTES, ORIGIN, PORT} = config.get('server')
 const CouchbaseStore = require('connect-couchbase')(session)
 const corsDef = {origin: ORIGIN, credentials: true}
-gdpr_bucket.on('connect', () => {
+supertest_bucket.on('connect', () => {
   const app = express()
   app.disable('x-powered-by')
   const couchbaseStore = new CouchbaseStore({
-    db: gdpr_bucket,
+    db: supertest_bucket,
     prefix: 'sess::'
   })
   app.use(cors(corsDef))
