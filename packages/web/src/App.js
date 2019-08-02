@@ -1,9 +1,9 @@
 import React from 'react'
-import { add } from '@mdb/common'
+import numeric from '@mdb/common/numeric'
 import { Typography } from '@material-ui/core'
 
 function App () {
-  return <Typography>{add(2, 2)}</Typography>
+  return <Typography>{numeric.printMoney(4)}</Typography>
 }
 
 export default App

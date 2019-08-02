@@ -1,0 +1,226 @@
+directive @auth on FIELD_DEFINITION
+
+directive @guest on FIELD_DEFINITION
+
+directive @cacheControl(maxAge: Int, scope: CacheControlScope) on FIELD_DEFINITION | OBJECT | INTERFACE
+
+input AddPolicyGdprInput {
+  timestamp: String
+  assessmentName: String
+  assessmentId: String!
+  orgName: String
+  orgId: String
+  date: String
+  score: Int
+  risk: String
+  domains: JSON
+  policy: JSON
+}
+
+input AddRegistryInput {
+  password: String!
+  cynation: CynationInput
+  username: String!
+  surname: String
+  name: String
+  gender: String
+  birth_day: String
+  birth_city: String
+  cf: String
+  vat: String
+  nationality: String
+  address: String
+  address_number: String
+  state: String
+  city: String
+  zip: String
+  phone: String
+  cellular: String
+  email: String!
+  pec: String
+  sdi: String
+  area: String
+  num_employes: Int
+  year_revenue: Int
+}
+
+input AddUserInput {
+  email: String!
+  username: String!
+  name: String
+  role: Roles!
+  password: String!
+}
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+type Cynation {
+  orgId: String
+  orgName: String
+  orgEmail: String
+}
+
+input CynationInput {
+  orgId: String
+  orgName: String
+  orgEmail: String
+}
+
+input EditPolicyGdprInput {
+  id: ID!
+  policy: JSON
+}
+
+input EditRegistryInput {
+  id: ID!
+  cynation: CynationInput
+  username: String!
+  surname: String
+  name: String
+  gender: String
+  birth_day: String
+  birth_city: String
+  cf: String
+  vat: String
+  nationality: String
+  address: String
+  address_number: String
+  state: String
+  city: String
+  zip: String
+  phone: String
+  cellular: String
+  email: String!
+  pec: String
+  sdi: String
+  area: String
+  num_employes: Int
+  year_revenue: Int
+}
+
+input EditUserInput {
+  username: String!
+  email: String!
+  role: Roles!
+}
+
+type Gs {
+  id: ID!
+  mails: [String!]!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+type Mutation {
+  _: String
+  add(input: AddUserInput!): User
+  edit(input: EditUserInput!): User
+  del(id: ID!): User
+  newPass(id: ID!, password: String!): User
+  signUp(email: String!, username: String!, name: String, role: Roles!, password: String!): User
+  signIn(username: String!, password: String!): User
+  signOut: Boolean
+  addRegistry(input: AddRegistryInput): Registry
+  editRegistry(input: EditRegistryInput): Registry
+  delRegistry(id: ID!): Registry
+  delFieldRegistry(id: ID!, field: String!): Registry
+  newPassRegistry(id: ID!, password: String!): Registry
+  signUpRegistry(email: String!, username: String!, name: String, password: String!): Registry
+  signInRegistry(username: String!, password: String!): Registry
+  signOutRegistry: Boolean
+  addPolicyGdpr(input: AddPolicyGdprInput): PolicyGdpr
+  delPolicyGdpr(id: ID!): PolicyGdpr
+  editPolicyGdpr(input: EditPolicyGdprInput!): PolicyGdpr
+}
+
+type PolicyGdpr {
+  id: ID!
+  timestamp: String
+  assessmentName: String
+  assessmentId: String!
+  orgName: String
+  orgId: String
+  date: String
+  score: Int
+  user: Registry
+  risk: String
+  domains: JSON
+  policy: JSON
+}
+
+type Query {
+  _: String
+  me: User
+  user(id: ID!): User
+  users(limit: Int, skip: Int): [User!]!
+  registry(id: ID!): Registry
+  registry_guest(id: ID!): Registry
+  registries(filter: String, limit: Int, skip: Int): [Registry!]!
+  registries_guest(limit: Int, skip: Int): [Registry!]!
+  gs: Gs
+  policy_gdpr(id: ID!): PolicyGdpr
+  policies_gdpr(limit: Int, skip: Int): [PolicyGdpr!]!
+}
+
+type Registry {
+  id: ID!
+  password: String!
+  createdAt: String!
+  updatedAt: String!
+  cynation: Cynation
+  username: String!
+  surname: String
+  name: String
+  gender: String
+  birth_day: String
+  birth_city: String
+  cf: String
+  vat: String
+  nationality: String
+  address: String
+  address_number: String
+  state: String
+  city: String
+  zip: String
+  phone: String
+  cellular: String
+  email: String!
+  pec: String
+  sdi: String
+  area: String
+  num_employes: Int
+  year_revenue: Int
+}
+
+enum Roles {
+  QUBO
+  GUEST
+}
+
+type Subscription {
+  _: String
+}
+
+scalar Upload
+
+type User {
+  id: ID!
+  email: String!
+  username: String!
+  name: String
+  role: Roles!
+  createdAt: String!
+  updatedAt: String!
+}
+

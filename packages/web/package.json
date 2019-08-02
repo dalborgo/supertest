@@ -13,7 +13,7 @@
     "typeface-roboto": "^0.0.75"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "SET PORT=4001&&react-app-rewired start",
     "build": "react-app-rewired build"
   },
   "eslintConfig": {
