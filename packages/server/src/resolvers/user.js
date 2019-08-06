@@ -30,7 +30,7 @@ export default {
       if (user.email !== input.email) {
         await User.check_email(input.email)
       }
-      updateFields(input, user)
+      Object.assign(user, input)
       await user.commit()
       return user
     },

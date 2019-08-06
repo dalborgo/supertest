@@ -1,9 +1,25 @@
-import React from 'react'
-import numeric from '@mdb/common/numeric'
-import { Typography } from '@material-ui/core'
+import React, { createProvider } from 'reactn'
+//import numeric from '@mdb/common/numeric'
+
+import { Prova } from './components'
+
+const INITIAL_STATE = {
+  loading: true,
+  users: 'dalborgo2',
+  n:0,
+  obj:{
+    mio:{
+      k:12
+    }
+  }
+}
+
+const Provider = createProvider(INITIAL_STATE)
 
 function App () {
-  return <Typography>{numeric.printMoney(4)}</Typography>
+  return <Provider>
+    <Prova/>
+  </Provider>
 }
 
 export default App
